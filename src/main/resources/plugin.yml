@@ -1,0 +1,4 @@
+name: minecraft-plugin-sandbox
+version: 0.1.0-SNAPSHOT
+description: マインクラフトのプラグイン作成のサンプル
+main: com.github.akzero53.SandboxPlugin
