@@ -4,10 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockDamageEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -25,22 +22,7 @@ public class SandboxPlugin extends JavaPlugin implements Listener {
     public void onEnable() {
         logger.info("Minecraft Sandbox Plugin Enabled.");
         this.getServer().getPluginManager().registerEvents(this, this);
-        this.getCommand("hoge").setExecutor(new HogeCommandExecutor());
-        this.getCommand("fuga").setExecutor(new FugaCommandExecutor());
-        this.getCommand("piyo").setExecutor(new PiyoCommandExecutor());
-    }
-
-    @EventHandler
-    public void playerMoveHandler(PlayerMoveEvent event) {
-        logger.info(event.getEventName());
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        logger.info(cmd.getName());
-        Boolean isPlayer = sender instanceof Player;
-        logger.info("is sender player: " + isPlayer);
-        return false;
+        this.getCommand("create").setExecutor(new CreateBlockExecutor());
     }
 
     @Override
@@ -48,35 +30,14 @@ public class SandboxPlugin extends JavaPlugin implements Listener {
         logger.info("Minecraft Sandbox Plugin Disabled.");
     }
 
-    class HogeCommandExecutor implements CommandExecutor {
-//        private final SandboxPlugin plugin;
-//
-//        public HogeCommandExecutor(SandboxPlugin plugin) {
-//            this.plugin = plugin;
-//        }
+    class CreateBlockExecutor implements CommandExecutor {
 
         @Override
         public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-            logger.info("hoge");
-            return false;
-        }
-    }
+            logger.info("create");
 
-    class FugaCommandExecutor implements CommandExecutor {
-
-        @Override
-        public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-            logger.info("fuga");
-            return false;
-        }
-    }
-
-    class PiyoCommandExecutor implements CommandExecutor {
-
-        @Override
-        public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-            logger.info("piyo");
-            return false;
+            // MEMO: falseを返すとusageが表示される。
+            return true;
         }
     }
 }

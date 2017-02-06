@@ -3,12 +3,6 @@ version: 0.1.0-SNAPSHOT
 description: マインクラフトのプラグイン作成のサンプル
 main: com.github.akzero53.SandboxPlugin
 commands:
-  hoge:
-    description: hoge is hoge!
-    usage: /hoge
-  fuga:
-    description: fuga is fuga!
-    usage: /fuga
-  piyo:
-    description: piyo is piyo!
-    usage: /piyo
+  create:
+    description: プレイヤーの前にブロックを作成する。
+    usage: /create
