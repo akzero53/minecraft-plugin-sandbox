@@ -4,6 +4,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -13,16 +17,22 @@ import java.util.logging.Logger;
  * SandboxPlugin is same as 'ProjectId'
  *
  */
-public class SandboxPlugin extends JavaPlugin {
+public class SandboxPlugin extends JavaPlugin implements Listener {
 
-    private Logger logger = getLogger();
+    private final Logger logger = getLogger();
 
     @Override
     public void onEnable() {
         logger.info("Minecraft Sandbox Plugin Enabled.");
+        this.getServer().getPluginManager().registerEvents(this, this);
         this.getCommand("hoge").setExecutor(new HogeCommandExecutor());
         this.getCommand("fuga").setExecutor(new FugaCommandExecutor());
         this.getCommand("piyo").setExecutor(new PiyoCommandExecutor());
+    }
+
+    @EventHandler
+    public void playerMoveHandler(PlayerMoveEvent event) {
+        logger.info(event.getEventName());
     }
 
     @Override
